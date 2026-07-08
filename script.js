@@ -36,30 +36,37 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
 
-// Auto play wedding song without button
+// Song auto play without button
 const song = document.getElementById("weddingSong");
 
 if (song) {
   song.loop = true;
   song.volume = 1;
+  song.muted = false;
+  song.setAttribute("playsinline", "true");
 
-  // Try autoplay when website opens
-  window.addEventListener("load", () => {
-    song.play().catch(() => {});
-  });
+  function playWeddingSong() {
+    song.muted = false;
+    song.volume = 1;
 
-  // If mobile browser blocks autoplay, first tap/scroll starts song
-  function startSongAfterTouch() {
-    song.play().catch(() => {});
+    const playPromise = song.play();
 
-    document.removeEventListener("click", startSongAfterTouch);
-    document.removeEventListener("touchstart", startSongAfterTouch);
-    document.removeEventListener("scroll", startSongAfterTouch);
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        // iPhone/Chrome may block until first user touch
+      });
+    }
   }
 
-  document.addEventListener("click", startSongAfterTouch);
-  document.addEventListener("touchstart", startSongAfterTouch);
-  document.addEventListener("scroll", startSongAfterTouch);
+  // Try when website opens
+  window.addEventListener("load", playWeddingSong);
+  document.addEventListener("DOMContentLoaded", playWeddingSong);
+
+  // Important: first user action will start song
+  document.addEventListener("click", playWeddingSong, { once: true, capture: true });
+  document.addEventListener("touchstart", playWeddingSong, { once: true, capture: true });
+  document.addEventListener("pointerdown", playWeddingSong, { once: true, capture: true });
+  document.addEventListener("scroll", playWeddingSong, { once: true, capture: true });
 }
 
 // Scratch to reveal date and time - old design + remember after scratched
@@ -178,3 +185,4 @@ document.querySelectorAll(".scratch-card").forEach((card, index) => {
 
   canvas.addEventListener("touchmove", scratch);
 });
+  
