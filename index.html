@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>V Karthick Weds M Sharmiladevi</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <audio id="weddingSong" src="assets/wedding-song.mp3" loop></audio>
+
+  <header class="topbar">
+    <div class="brand">VK <span>|</span> MS</div>
+    <nav>
+      <a href="#events">Events</a>
+      <a href="#venue">Venue</a>
+      <a href="#blessings">Blessings</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-card reveal">
+        <p class="small-title">Wedding Invitation</p>
+
+        <h1>
+          <span>V Karthick</span>
+          <small>&</small>
+          <span>M Sharmiladevi</span>
+        </h1>
+
+        <p class="invite-text">
+          Together with our families, we invite you to celebrate our wedding ceremony.
+        </p>
+
+        <div class="art-box">
+          <img src="assets/wedding-art.svg" alt="Wedding art" />
+        </div>
+
+        <button id="musicBtn" class="music-btn" type="button">▶ Play Song</button>
+        <p class="tap-note">Tap anywhere once to start music</p>
+      </div>
+    </section>
+
+    <section class="countdown-section reveal">
+      <p class="section-subtitle">Counting down to our special day</p>
+      <h2>Wedding Countdown</h2>
+
+      <div class="countdown">
+        <div><strong id="days">00</strong><span>Days</span></div>
+        <div><strong id="hours">00</strong><span>Hours</span></div>
+        <div><strong id="minutes">00</strong><span>Minutes</span></div>
+        <div><strong id="seconds">00</strong><span>Seconds</span></div>
+      </div>
+    </section>
+
+    <section id="events" class="events-section">
+      <p class="section-subtitle reveal">Scratch the card to reveal date and time</p>
+      <h2 class="reveal">Events</h2>
+
+      <div class="event-grid">
+        <div class="event-card scratch-card reveal">
+          <div class="scratch-content">
+            <p class="event-label">Reception</p>
+            <h3>24 October 2026</h3>
+            <p>Saturday</p>
+            <p class="time">06:00 PM - 09:00 PM</p>
+            <p class="place">Thangamayil Madapam</p>
+          </div>
+          <canvas class="scratch-canvas"></canvas>
+          <div class="scratch-text">Scratch to Reveal Reception</div>
+        </div>
+
+        <div class="event-card scratch-card reveal">
+          <div class="scratch-content">
+            <p class="event-label">Muhurtham</p>
+            <h3>25 October 2026</h3>
+            <p>Sunday</p>
+            <p class="time">04:00 AM - 05:30 AM</p>
+            <p class="place">Thangamayil Madapam</p>
+          </div>
+          <canvas class="scratch-canvas"></canvas>
+          <div class="scratch-text">Scratch to Reveal Muhurtham</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="venue" class="venue-section reveal">
+      <p class="section-subtitle">Venue</p>
+      <h2>Thangamayil Madapam</h2>
+      <p>We would be happy to have your presence on our special day.</p>
+      <a class="map-btn" href="https://maps.app.goo.gl/ro1zkefcys1b9cpv6?g_st=ic" target="_blank" rel="noopener">Open Google Map</a>
+    </section>
+
+    <section id="blessings" class="blessings-section reveal">
+      <p class="section-subtitle">With love</p>
+      <h2>Your Presence Is Our Blessing</h2>
+      <p>We request the honour of your presence and blessings as we begin our new journey together.</p>
+      <div class="names">
+        <span>V Karthick</span>
+        <small>&</small>
+        <span>M Sharmiladevi</span>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>With love, V Karthick & M Sharmiladevi</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

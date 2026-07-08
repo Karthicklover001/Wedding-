@@ -1,0 +1,303 @@
+:root {
+  --maroon: #6f1028;
+  --dark-maroon: #3e0718;
+  --gold: #c89b4d;
+  --soft-gold: #fff4d6;
+  --cream: #fff8ef;
+  --pink: #fde8e8;
+  --text: #301018;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(200,155,77,0.28), transparent 34%),
+    linear-gradient(135deg, #fff8ef 0%, #fde5e7 45%, #fff8ef 100%);
+  overflow-x: hidden;
+}
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  width: 230px;
+  height: 230px;
+  border: 1px solid rgba(111,16,40,0.16);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+body::before { top: 80px; left: -90px; }
+body::after { bottom: -90px; right: -80px; }
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 7%;
+  background: rgba(255,248,239,0.82);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(111,16,40,0.12);
+}
+
+.brand {
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  color: var(--maroon);
+  letter-spacing: 1px;
+}
+
+.brand span { color: var(--gold); }
+
+nav { display: flex; gap: 18px; }
+nav a {
+  text-decoration: none;
+  color: var(--dark-maroon);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.hero {
+  min-height: 88vh;
+  display: grid;
+  place-items: center;
+  padding: 44px 18px;
+}
+
+.hero-card {
+  width: min(720px, 100%);
+  text-align: center;
+  padding: 38px 20px 28px;
+  border-radius: 32px;
+  background: rgba(255,248,239,0.84);
+  border: 1px solid rgba(200,155,77,0.42);
+  box-shadow: 0 20px 60px rgba(111,16,40,0.16);
+}
+
+.small-title,
+.section-subtitle,
+.event-label {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+h1 {
+  margin: 8px 0 12px;
+  font-family: "Great Vibes", cursive;
+  font-weight: 400;
+  color: var(--maroon);
+  line-height: 0.98;
+  font-size: clamp(54px, 11vw, 98px);
+}
+
+h1 span { display: block; }
+h1 small {
+  display: block;
+  font-family: "Playfair Display", serif;
+  font-size: 28px;
+  color: var(--gold);
+  margin: 8px 0;
+}
+
+.invite-text {
+  max-width: 470px;
+  margin: 0 auto 24px;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.art-box {
+  width: min(340px, 88%);
+  margin: 0 auto 22px;
+  padding: 16px;
+  border-radius: 26px;
+  background: linear-gradient(180deg, #fffdf7, #ffe8ef);
+  border: 1px solid rgba(200,155,77,0.32);
+}
+
+.art-box img { width: 100%; display: block; }
+
+.music-btn,
+.map-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  text-decoration: none;
+  border-radius: 999px;
+  padding: 13px 24px;
+  background: linear-gradient(135deg, var(--maroon), #9b1739);
+  color: white;
+  font-weight: 600;
+  box-shadow: 0 12px 24px rgba(111,16,40,0.24);
+  cursor: pointer;
+}
+
+.music-btn.playing { background: linear-gradient(135deg, #9c752b, var(--gold)); }
+.tap-note { font-size: 12px; color: rgba(48,16,24,0.62); margin-top: 10px; }
+
+section { padding: 58px 7%; text-align: center; }
+
+h2 {
+  margin: 8px 0 24px;
+  font-family: "Playfair Display", serif;
+  color: var(--maroon);
+  font-size: clamp(30px, 6vw, 50px);
+}
+
+.countdown {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.countdown div,
+.event-card,
+.venue-section,
+.blessings-section {
+  background: rgba(255,248,239,0.86);
+  border: 1px solid rgba(200,155,77,0.34);
+  border-radius: 26px;
+  box-shadow: 0 14px 36px rgba(111,16,40,0.10);
+}
+
+.countdown div { padding: 22px 10px; }
+.countdown strong {
+  display: block;
+  font-family: "Playfair Display", serif;
+  color: var(--maroon);
+  font-size: 34px;
+}
+.countdown span { color: rgba(48,16,24,0.65); font-size: 13px; }
+
+.event-grid {
+  max-width: 980px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.event-card {
+  padding: 34px 22px;
+  min-height: 240px;
+}
+
+.event-card h3 {
+  font-family: "Playfair Display", serif;
+  color: var(--maroon);
+  margin: 6px 0 6px;
+  font-size: 28px;
+}
+
+.event-card p { margin: 7px 0; }
+.time { font-weight: 700; color: var(--dark-maroon); }
+.place { color: var(--maroon); font-weight: 600; }
+
+.venue-section,
+.blessings-section {
+  width: min(900px, 86%);
+  margin: 40px auto;
+  padding: 48px 24px;
+}
+
+.venue-section p,
+.blessings-section p {
+  max-width: 620px;
+  margin: 0 auto 24px;
+  line-height: 1.8;
+}
+
+.names {
+  margin-top: 28px;
+  font-family: "Great Vibes", cursive;
+  color: var(--maroon);
+  font-size: clamp(38px, 8vw, 72px);
+}
+.names span { display: block; }
+.names small {
+  font-family: "Playfair Display", serif;
+  color: var(--gold);
+  font-size: 24px;
+}
+
+footer {
+  text-align: center;
+  padding: 28px 18px;
+  color: rgba(48,16,24,0.65);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: 0.75s ease;
+}
+.reveal.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scratch-card {
+  position: relative;
+  overflow: hidden;
+  touch-action: none;
+}
+
+.scratch-content {
+  position: relative;
+  z-index: 1;
+}
+
+.scratch-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  border-radius: 26px;
+}
+
+.scratch-text {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  text-align: center;
+  color: #fff7d6;
+  font-family: "Playfair Display", serif;
+  font-size: 20px;
+  font-weight: 700;
+  pointer-events: none;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.35);
+}
+
+@media (max-width: 720px) {
+  .topbar { padding: 14px 16px; }
+  nav { gap: 10px; }
+  nav a { font-size: 12px; }
+  .hero { padding-top: 24px; }
+  .hero-card { padding: 30px 14px 24px; border-radius: 26px; }
+  .countdown { grid-template-columns: repeat(2, 1fr); }
+  .event-grid { grid-template-columns: 1fr; }
+  section { padding: 46px 16px; }
+  .venue-section, .blessings-section { width: calc(100% - 32px); }
+}
