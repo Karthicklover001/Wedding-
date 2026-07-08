@@ -1,0 +1,5 @@
+How to add song:
+1. Rename your song file to wedding-song.mp3
+2. Upload it inside assets folder.
+3. Final path must be assets/wedding-song.mp3
+4. Website will show Play Song button. User must tap it because mobile browsers block auto-play.
