@@ -1,4 +1,4 @@
-const target = new Date("2026-10-25T04:00:00+05:30").getTime();
+      const target = new Date("2026-10-25T04:00:00+05:30").getTime();
 
 const ids = ["days", "hours", "minutes", "seconds"].map((id) =>
   document.getElementById(id)
@@ -36,159 +36,160 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
 
-// Song play / pause button
+// Auto play wedding song without button
 const song = document.getElementById("weddingSong");
-const musicBtn = document.getElementById("musicBtn");
 
-if (song) song.loop = true;
+if (song) {
+  song.loop = true;
+  song.volume = 1;
 
-if (song && musicBtn) {
-  musicBtn.addEventListener("click", async () => {
-    try {
-      if (song.paused) {
-        await song.play();
-        musicBtn.textContent = "⏸ Pause Song";
-        musicBtn.classList.add("playing");
-      } else {
-        song.pause();
-        musicBtn.textContent = "▶ Play Song";
-        musicBtn.classList.remove("playing");
-      }
-    } catch (err) {
-      musicBtn.textContent = "Tap Again to Play";
-    }
+  window.addEventListener("load", () => {
+    song.play().catch(() => {});
   });
-}
 
-// Near auto-play: first tap anywhere starts song
-function startWeddingSong() {
-  if (song) {
-    song
-      .play()
-      .then(() => {
-        if (musicBtn) {
-          musicBtn.textContent = "⏸ Pause Song";
-          musicBtn.classList.add("playing");
-        }
-      })
-      .catch(() => {});
+  function startSongAfterTouch() {
+    song.play().catch(() => {});
+
+    document.removeEventListener("click", startSongAfterTouch);
+    document.removeEventListener("touchstart", startSongAfterTouch);
+    document.removeEventListener("scroll", startSongAfterTouch);
   }
 
-  document.removeEventListener("click", startWeddingSong);
-  document.removeEventListener("touchstart", startWeddingSong);
+  document.addEventListener("click", startSongAfterTouch);
+  document.addEventListener("touchstart", startSongAfterTouch);
+  document.addEventListener("scroll", startSongAfterTouch);
 }
 
-document.addEventListener("click", startWeddingSong);
-document.addEventListener("touchstart", startWeddingSong);
+// Premium scratch reveal - remember after scratched
+document.querySelectorAll(".scratch-card").forEach((card, index) => {
+  const canvas = card.querySelector(".scratch-canvas");
+  const cover = card.querySelector(".scratch-cover");
+  const ctx = canvas.getContext("2d");
 
-// Scratch to reveal event date and time
-function setupScratchCards() {
-  document.querySelectorAll(".scratch-card").forEach((card) => {
-    const canvas = card.querySelector(".scratch-canvas");
-    const text = card.querySelector(".scratch-text");
-    if (!canvas || !text) return;
+  const scratchKey = `karthickWeddingScratchDone_${index}`;
 
-    const ctx = canvas.getContext("2d");
-    let scratching = false;
-    let revealed = false;
+  if (localStorage.getItem(scratchKey) === "yes") {
+    canvas.style.display = "none";
+    if (cover) cover.style.display = "none";
+    return;
+  }
 
-    function resizeCanvas() {
-      if (revealed) return;
+  function drawScratchLayer() {
+    const rect = card.getBoundingClientRect();
+    canvas.width = rect.width;
+    canvas.height = rect.height;
 
-      const rect = card.getBoundingClientRect();
-      const ratio = window.devicePixelRatio || 1;
+    ctx.globalCompositeOperation = "source-over";
 
-      canvas.width = Math.floor(rect.width * ratio);
-      canvas.height = Math.floor(rect.height * ratio);
-      canvas.style.width = `${rect.width}px`;
-      canvas.style.height = `${rect.height}px`;
-      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+    const bg = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+    bg.addColorStop(0, "#4b0014");
+    bg.addColorStop(0.35, "#8b1635");
+    bg.addColorStop(0.7, "#c79a4b");
+    bg.addColorStop(1, "#5b0018");
 
-      const gradient = ctx.createLinearGradient(0, 0, rect.width, rect.height);
-      gradient.addColorStop(0, "#7b1028");
-      gradient.addColorStop(0.5, "#c89b4d");
-      gradient.addColorStop(1, "#3e0718");
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      ctx.globalCompositeOperation = "source-over";
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, rect.width, rect.height);
+    // Golden shine lines
+    ctx.strokeStyle = "rgba(255, 235, 170, 0.22)";
+    ctx.lineWidth = 2;
 
-      ctx.fillStyle = "rgba(255, 255, 255, 0.18)";
-      for (let i = 0; i < 90; i++) {
-        ctx.beginPath();
-        ctx.arc(
-          Math.random() * rect.width,
-          Math.random() * rect.height,
-          Math.random() * 2 + 1,
-          0,
-          Math.PI * 2
-        );
-        ctx.fill();
-      }
-    }
-
-    function getPosition(e) {
-      const rect = canvas.getBoundingClientRect();
-      const touch = e.touches ? e.touches[0] : e;
-      return {
-        x: touch.clientX - rect.left,
-        y: touch.clientY - rect.top,
-      };
-    }
-
-    function scratch(e) {
-      if (!scratching || revealed) return;
-      e.preventDefault();
-
-      const pos = getPosition(e);
-      ctx.globalCompositeOperation = "destination-out";
+    for (let i = -canvas.height; i < canvas.width; i += 34) {
       ctx.beginPath();
-      ctx.arc(pos.x, pos.y, 26, 0, Math.PI * 2);
+      ctx.moveTo(i, canvas.height);
+      ctx.lineTo(i + canvas.height, 0);
+      ctx.stroke();
+    }
+
+    // Glitter dots
+    for (let i = 0; i < 140; i++) {
+      const x = Math.random() * canvas.width;
+      const y = Math.random() * canvas.height;
+      const r = Math.random() * 2.2 + 0.6;
+
+      ctx.beginPath();
+      ctx.fillStyle =
+        Math.random() > 0.45
+          ? "rgba(255, 240, 190, 0.55)"
+          : "rgba(255, 255, 255, 0.22)";
+      ctx.arc(x, y, r, 0, Math.PI * 2);
       ctx.fill();
-
-      checkScratchAmount();
     }
 
-    function checkScratchAmount() {
-      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-      let cleared = 0;
+    // Border glow
+    ctx.strokeStyle = "rgba(255, 225, 145, 0.75)";
+    ctx.lineWidth = 4;
+    ctx.strokeRect(8, 8, canvas.width - 16, canvas.height - 16);
+  }
 
-      for (let i = 3; i < imageData.data.length; i += 4) {
-        if (imageData.data[i] === 0) cleared++;
-      }
+  drawScratchLayer();
+  window.addEventListener("resize", drawScratchLayer);
 
-      const percent = (cleared / (imageData.data.length / 4)) * 100;
-      if (percent > 38) revealCard();
+  let scratching = false;
+
+  function getPosition(e) {
+    const rect = canvas.getBoundingClientRect();
+    const touch = e.touches ? e.touches[0] : e;
+
+    return {
+      x: touch.clientX - rect.left,
+      y: touch.clientY - rect.top
+    };
+  }
+
+  function scratch(e) {
+    if (!scratching) return;
+    e.preventDefault();
+
+    const pos = getPosition(e);
+
+    ctx.globalCompositeOperation = "destination-out";
+    ctx.beginPath();
+    ctx.arc(pos.x, pos.y, 34, 0, Math.PI * 2);
+    ctx.fill();
+
+    checkScratchAmount();
+  }
+
+  function checkScratchAmount() {
+    const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    let cleared = 0;
+
+    for (let i = 3; i < pixels.data.length; i += 4) {
+      if (pixels.data[i] === 0) cleared++;
     }
 
-    function revealCard() {
-      revealed = true;
-      canvas.style.transition = "opacity 0.45s ease";
-      text.style.transition = "opacity 0.45s ease";
-      canvas.style.opacity = "0";
-      text.style.opacity = "0";
-      setTimeout(() => {
-        canvas.style.display = "none";
-        text.style.display = "none";
-      }, 460);
+    const percent = (cleared / (pixels.data.length / 4)) * 100;
+
+    if (percent > 28) {
+      canvas.style.display = "none";
+      if (cover) cover.style.display = "none";
+
+      localStorage.setItem(scratchKey, "yes");
     }
+  }
 
-    resizeCanvas();
-    window.addEventListener("resize", resizeCanvas);
-
-    canvas.addEventListener("mousedown", () => (scratching = true));
-    window.addEventListener("mouseup", () => (scratching = false));
-    canvas.addEventListener("mouseleave", () => (scratching = false));
-    canvas.addEventListener("mousemove", scratch);
-
-    canvas.addEventListener("touchstart", (e) => {
-      scratching = true;
-      scratch(e);
-    }, { passive: false });
-    canvas.addEventListener("touchend", () => (scratching = false));
-    canvas.addEventListener("touchcancel", () => (scratching = false));
-    canvas.addEventListener("touchmove", scratch, { passive: false });
+  canvas.addEventListener("mousedown", () => {
+    scratching = true;
   });
-}
 
-window.addEventListener("load", setupScratchCards);
+  canvas.addEventListener("mouseup", () => {
+    scratching = false;
+  });
+
+  canvas.addEventListener("mouseleave", () => {
+    scratching = false;
+  });
+
+  canvas.addEventListener("mousemove", scratch);
+
+  canvas.addEventListener("touchstart", () => {
+    scratching = true;
+  });
+
+  canvas.addEventListener("touchend", () => {
+    scratching = false;
+  });
+
+  canvas.addEventListener("touchmove", scratch);
+});
