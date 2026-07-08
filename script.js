@@ -1,4 +1,4 @@
-      const target = new Date("2026-10-25T04:00:00+05:30").getTime();
+const target = new Date("2026-10-25T04:00:00+05:30").getTime();
 
 const ids = ["days", "hours", "minutes", "seconds"].map((id) =>
   document.getElementById(id)
@@ -43,10 +43,12 @@ if (song) {
   song.loop = true;
   song.volume = 1;
 
+  // Try autoplay when website opens
   window.addEventListener("load", () => {
     song.play().catch(() => {});
   });
 
+  // If mobile browser blocks autoplay, first tap/scroll starts song
   function startSongAfterTouch() {
     song.play().catch(() => {});
 
@@ -60,70 +62,52 @@ if (song) {
   document.addEventListener("scroll", startSongAfterTouch);
 }
 
-// Premium scratch reveal - remember after scratched
+// Scratch to reveal date and time - old design + remember after scratched
 document.querySelectorAll(".scratch-card").forEach((card, index) => {
   const canvas = card.querySelector(".scratch-canvas");
-  const cover = card.querySelector(".scratch-cover");
+  const text = card.querySelector(".scratch-text");
   const ctx = canvas.getContext("2d");
 
-  const scratchKey = `karthickWeddingScratchDone_${index}`;
+  const scratchKey = `weddingScratchRevealed_${index}`;
 
+  // Already scratched before? Then show directly
   if (localStorage.getItem(scratchKey) === "yes") {
     canvas.style.display = "none";
-    if (cover) cover.style.display = "none";
+    text.style.display = "none";
     return;
   }
 
-  function drawScratchLayer() {
+  function resizeCanvas() {
     const rect = card.getBoundingClientRect();
     canvas.width = rect.width;
     canvas.height = rect.height;
 
+    const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+    gradient.addColorStop(0, "#7b1028");
+    gradient.addColorStop(0.5, "#b88a44");
+    gradient.addColorStop(1, "#4b0718");
+
     ctx.globalCompositeOperation = "source-over";
-
-    const bg = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-    bg.addColorStop(0, "#4b0014");
-    bg.addColorStop(0.35, "#8b1635");
-    bg.addColorStop(0.7, "#c79a4b");
-    bg.addColorStop(1, "#5b0018");
-
-    ctx.fillStyle = bg;
+    ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Golden shine lines
-    ctx.strokeStyle = "rgba(255, 235, 170, 0.22)";
-    ctx.lineWidth = 2;
+    ctx.fillStyle = "rgba(255, 255, 255, 0.16)";
 
-    for (let i = -canvas.height; i < canvas.width; i += 34) {
+    for (let i = 0; i < 100; i++) {
       ctx.beginPath();
-      ctx.moveTo(i, canvas.height);
-      ctx.lineTo(i + canvas.height, 0);
-      ctx.stroke();
-    }
-
-    // Glitter dots
-    for (let i = 0; i < 140; i++) {
-      const x = Math.random() * canvas.width;
-      const y = Math.random() * canvas.height;
-      const r = Math.random() * 2.2 + 0.6;
-
-      ctx.beginPath();
-      ctx.fillStyle =
-        Math.random() > 0.45
-          ? "rgba(255, 240, 190, 0.55)"
-          : "rgba(255, 255, 255, 0.22)";
-      ctx.arc(x, y, r, 0, Math.PI * 2);
+      ctx.arc(
+        Math.random() * canvas.width,
+        Math.random() * canvas.height,
+        Math.random() * 2 + 1,
+        0,
+        Math.PI * 2
+      );
       ctx.fill();
     }
-
-    // Border glow
-    ctx.strokeStyle = "rgba(255, 225, 145, 0.75)";
-    ctx.lineWidth = 4;
-    ctx.strokeRect(8, 8, canvas.width - 16, canvas.height - 16);
   }
 
-  drawScratchLayer();
-  window.addEventListener("resize", drawScratchLayer);
+  resizeCanvas();
+  window.addEventListener("resize", resizeCanvas);
 
   let scratching = false;
 
@@ -145,7 +129,7 @@ document.querySelectorAll(".scratch-card").forEach((card, index) => {
 
     ctx.globalCompositeOperation = "destination-out";
     ctx.beginPath();
-    ctx.arc(pos.x, pos.y, 34, 0, Math.PI * 2);
+    ctx.arc(pos.x, pos.y, 30, 0, Math.PI * 2);
     ctx.fill();
 
     checkScratchAmount();
@@ -161,10 +145,11 @@ document.querySelectorAll(".scratch-card").forEach((card, index) => {
 
     const percent = (cleared / (pixels.data.length / 4)) * 100;
 
-    if (percent > 28) {
+    if (percent > 35) {
       canvas.style.display = "none";
-      if (cover) cover.style.display = "none";
+      text.style.display = "none";
 
+      // Same phone/browser-la next time scratch varadhu
       localStorage.setItem(scratchKey, "yes");
     }
   }
