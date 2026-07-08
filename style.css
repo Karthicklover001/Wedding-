@@ -1,151 +1,348 @@
- <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>V Karthick Weds M Sharmiladevi</title>
+ * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+html {
+  scroll-behavior: smooth;
+}
 
-  <link rel="stylesheet" href="style.css" />
-</head>
+body {
+  font-family: "Poppins", sans-serif;
+  background:
+    radial-gradient(circle at top, rgba(255, 220, 150, 0.25), transparent 35%),
+    linear-gradient(135deg, #31000d, #5d0b20 45%, #2a000b);
+  color: #fff6df;
+  min-height: 100vh;
+}
 
-<body>
-  <audio id="weddingSong" src="assets/wedding-song.mp3" autoplay loop playsinline></audio>
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 7%;
+  background: rgba(40, 0, 12, 0.72);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 215, 145, 0.22);
+}
 
-  <header class="topbar">
-    <div class="brand">VK <span>|</span> MS</div>
+.brand {
+  font-family: "Playfair Display", serif;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #ffd98a;
+}
 
-    <nav>
-      <a href="#events">Events</a>
-      <a href="#venue">Venue</a>
-      <a href="#blessings">Blessings</a>
-    </nav>
-  </header>
+.brand span {
+  color: #fff;
+  opacity: 0.6;
+}
 
-  <main>
-    <section class="hero">
-      <div class="hero-card reveal">
-        <p class="small-title">Wedding Invitation</p>
+nav {
+  display: flex;
+  gap: 20px;
+}
 
-        <h1>
-          <span>V Karthick</span>
-          <small>&</small>
-          <span>M Sharmiladevi</span>
-        </h1>
+nav a {
+  color: #fff4d5;
+  text-decoration: none;
+  font-size: 14px;
+  opacity: 0.9;
+}
 
-        <p class="invite-text">
-          Together with our families, we invite you to celebrate our wedding ceremony.
-        </p>
+nav a:hover {
+  color: #ffd98a;
+}
 
-        <div class="art-box">
-          <img src="assets/wedding-art.svg" alt="Wedding art" />
-        </div>
-      </div>
-    </section>
+.hero {
+  min-height: 92vh;
+  display: grid;
+  place-items: center;
+  padding: 60px 18px;
+}
 
-    <section class="countdown-section reveal">
-      <p class="section-subtitle">Counting down to our special day</p>
-      <h2>Wedding Countdown</h2>
+.hero-card {
+  width: min(940px, 100%);
+  text-align: center;
+  padding: 48px 22px;
+  border-radius: 34px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04)),
+    rgba(80, 6, 26, 0.72);
+  border: 1px solid rgba(255, 215, 145, 0.35);
+  box-shadow: 0 30px 90px rgba(0,0,0,0.35);
+}
 
-      <div class="countdown">
-        <div>
-          <strong id="days">00</strong>
-          <span>Days</span>
-        </div>
-        <div>
-          <strong id="hours">00</strong>
-          <span>Hours</span>
-        </div>
-        <div>
-          <strong id="minutes">00</strong>
-          <span>Minutes</span>
-        </div>
-        <div>
-          <strong id="seconds">00</strong>
-          <span>Seconds</span>
-        </div>
-      </div>
-    </section>
+.small-title,
+.section-subtitle,
+.event-label {
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #ffd98a;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
 
-    <section id="events" class="events-section">
-      <p class="section-subtitle reveal">Scratch and reveal</p>
-      <h2 class="reveal">Events</h2>
+h1 {
+  font-family: "Great Vibes", cursive;
+  font-size: clamp(54px, 10vw, 118px);
+  line-height: 0.95;
+  color: #ffe6a7;
+  text-shadow: 0 6px 22px rgba(0,0,0,0.35);
+}
 
-      <div class="event-grid">
-        <div class="event-card scratch-card reveal">
-          <div class="scratch-content">
-            <p class="event-label">Reception</p>
-            <h3>24 October 2026</h3>
-            <p>Saturday</p>
-            <p class="time">06:00 PM - 09:00 PM</p>
-            <p class="place">Thangamayil Madapam</p>
-          </div>
+h1 span {
+  display: block;
+}
 
-          <canvas class="scratch-canvas"></canvas>
+h1 small {
+  display: block;
+  font-family: "Playfair Display", serif;
+  font-size: 38px;
+  margin: 10px 0;
+  color: #fff7e0;
+}
 
-          <div class="scratch-cover">
-            <div class="scratch-icon">💌</div>
-            <div class="scratch-text">Scratch to Reveal</div>
-            <div class="scratch-subtext">Reception Details</div>
-          </div>
-        </div>
+.invite-text {
+  max-width: 620px;
+  margin: 26px auto;
+  line-height: 1.8;
+  color: #fff3d0;
+}
 
-        <div class="event-card scratch-card reveal">
-          <div class="scratch-content">
-            <p class="event-label">Muhurtham</p>
-            <h3>25 October 2026</h3>
-            <p>Sunday</p>
-            <p class="time">04:00 AM - 05:30 AM</p>
-            <p class="place">Thangamayil Madapam</p>
-          </div>
+.art-box {
+  width: min(360px, 92%);
+  margin: 20px auto;
+  border-radius: 28px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255, 215, 145, 0.25);
+}
 
-          <canvas class="scratch-canvas"></canvas>
+.art-box img {
+  width: 100%;
+  display: block;
+}
 
-          <div class="scratch-cover">
-            <div class="scratch-icon">🪔</div>
-            <div class="scratch-text">Scratch to Reveal</div>
-            <div class="scratch-subtext">Muhurtham Details</div>
-          </div>
-        </div>
-      </div>
-    </section>
+.map-btn {
+  display: inline-block;
+  border: none;
+  text-decoration: none;
+  padding: 14px 24px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ffd98a, #b98233);
+  color: #430012;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.25);
+}
 
-    <section id="venue" class="venue-section reveal">
-      <p class="section-subtitle">Venue</p>
-      <h2>Thangamayil Madapam</h2>
+.countdown-section,
+.events-section,
+.venue-section,
+.blessings-section {
+  padding: 70px 7%;
+  text-align: center;
+}
 
-      <p>
-        We would be happy to have your presence on our special day.
-      </p>
+h2 {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(32px, 5vw, 54px);
+  color: #ffe3a1;
+  margin-bottom: 28px;
+}
 
-      <a class="map-btn" href="https://maps.app.goo.gl/ro1zkefcys1b9cpv6?g_st=ic" target="_blank">
-        Open Google Map
-      </a>
-    </section>
+.countdown {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  max-width: 760px;
+  margin: 0 auto;
+}
 
-    <section id="blessings" class="blessings-section reveal">
-      <p class="section-subtitle">With love</p>
-      <h2>Your Presence Is Our Blessing</h2>
+.countdown div {
+  padding: 24px 12px;
+  border-radius: 24px;
+  background: rgba(255,255,255,0.09);
+  border: 1px solid rgba(255, 215, 145, 0.23);
+}
 
-      <p>
-        We request the honour of your presence and blessings as we begin our new journey together.
-      </p>
+.countdown strong {
+  display: block;
+  font-family: "Playfair Display", serif;
+  font-size: clamp(30px, 6vw, 56px);
+  color: #ffd98a;
+}
 
-      <div class="names">
-        <span>V Karthick</span>
-        <small>&</small>
-        <span>M Sharmiladevi</span>
-      </div>
-    </section>
-  </main>
+.countdown span {
+  font-size: 13px;
+  color: #fff2d1;
+}
 
-  <footer>
-    <p>With love, V Karthick & M Sharmiladevi</p>
-  </footer>
+.event-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
 
-  <script src="script.js"></script>
-</body>
-</html>
+.event-card {
+  padding: 34px 22px;
+  border-radius: 28px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04)),
+    rgba(105, 12, 39, 0.72);
+  border: 1px solid rgba(255, 215, 145, 0.32);
+  box-shadow: 0 18px 55px rgba(0,0,0,0.25);
+}
+
+.event-card h3 {
+  font-family: "Playfair Display", serif;
+  font-size: 28px;
+  color: #ffe3a1;
+  margin-bottom: 8px;
+}
+
+.time {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffd98a;
+  margin: 16px 0 8px;
+}
+
+.place {
+  color: #fff6df;
+  font-weight: 500;
+}
+
+.venue-section,
+.blessings-section {
+  max-width: 900px;
+  margin: 0 auto 60px;
+  border-radius: 30px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255, 215, 145, 0.22);
+}
+
+.venue-section p,
+.blessings-section p {
+  max-width: 650px;
+  margin: 0 auto 24px;
+  line-height: 1.8;
+  color: #fff3d0;
+}
+
+.names {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+  font-family: "Great Vibes", cursive;
+  font-size: 38px;
+  color: #ffe3a1;
+}
+
+.names small {
+  font-family: "Playfair Display", serif;
+  font-size: 24px;
+  color: #fff;
+}
+
+footer {
+  text-align: center;
+  padding: 28px 16px;
+  color: #fff1c8;
+  border-top: 1px solid rgba(255, 215, 145, 0.16);
+}
+
+/* Old Scratch Box Design */
+.scratch-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 250px;
+  touch-action: none;
+}
+
+.scratch-content {
+  position: relative;
+  z-index: 1;
+}
+
+.scratch-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  border-radius: 28px;
+}
+
+.scratch-text {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  color: #fff7d6;
+  font-family: "Playfair Display", serif;
+  font-size: 21px;
+  font-weight: 700;
+  pointer-events: none;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.45);
+}
+
+/* Animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: 0.8s ease;
+}
+
+.reveal.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 760px) {
+  .topbar {
+    padding: 14px 5%;
+  }
+
+  nav {
+    gap: 12px;
+  }
+
+  nav a {
+    font-size: 12px;
+  }
+
+  .hero-card {
+    padding: 38px 16px;
+  }
+
+  .countdown {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .event-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .names {
+    font-size: 32px;
+  }
+}
+  
