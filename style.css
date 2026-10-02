@@ -1,4 +1,4 @@
- * {
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -8,93 +8,268 @@ html {
   scroll-behavior: smooth;
 }
 
+:root {
+  --maroon-dark: #210009;
+  --maroon: #3b0715;
+  --maroon-light: #65142b;
+
+  --gold: #d9a441;
+  --gold-light: #ffe5a0;
+  --gold-bright: #fff0bd;
+
+  --cream: #fff7e4;
+  --cream-soft: #f9eac8;
+}
+
 body {
   font-family: "Poppins", sans-serif;
+
   background:
-    radial-gradient(circle at top, rgba(255, 220, 150, 0.25), transparent 35%),
-    linear-gradient(135deg, #31000d, #5d0b20 45%, #2a000b);
-  color: #fff6df;
+    radial-gradient(
+      circle at 50% -10%,
+      rgba(221, 169, 70, 0.22),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 10% 50%,
+      rgba(125, 15, 48, 0.35),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 90% 80%,
+      rgba(125, 15, 48, 0.3),
+      transparent 30%
+    ),
+    linear-gradient(
+      135deg,
+      #210009,
+      #4a091b 45%,
+      #26000b
+    );
+
+  color: var(--cream);
   min-height: 100vh;
+  overflow-x: hidden;
 }
+
+/* =========================
+   GOLD PARTICLES
+========================= */
+
+.gold-particles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.5;
+
+  background-image:
+    radial-gradient(circle, rgba(255, 220, 130, 0.5) 1px, transparent 1px),
+    radial-gradient(circle, rgba(255, 220, 130, 0.3) 1px, transparent 1px);
+
+  background-size: 90px 90px, 140px 140px;
+  background-position: 0 0, 40px 60px;
+}
+
+/* =========================
+   TOP BAR
+========================= */
 
 .topbar {
   position: sticky;
   top: 0;
-  z-index: 20;
+  z-index: 50;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 18px 7%;
-  background: rgba(40, 0, 12, 0.72);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 215, 145, 0.22);
+
+  padding: 16px 7%;
+
+  background: rgba(29, 0, 9, 0.82);
+  backdrop-filter: blur(18px);
+
+  border-bottom: 1px solid rgba(255, 216, 139, 0.2);
 }
 
 .brand {
   font-family: "Playfair Display", serif;
-  font-size: 22px;
+  font-size: 23px;
   font-weight: 700;
-  letter-spacing: 2px;
-  color: #ffd98a;
+  letter-spacing: 3px;
+  color: var(--gold-light);
 }
 
 .brand span {
-  color: #fff;
-  opacity: 0.6;
+  color: var(--gold);
+  font-size: 15px;
+  margin: 0 3px;
 }
 
 nav {
   display: flex;
-  gap: 20px;
+  gap: 25px;
 }
 
 nav a {
-  color: #fff4d5;
+  position: relative;
+
+  color: var(--cream-soft);
   text-decoration: none;
-  font-size: 14px;
-  opacity: 0.9;
+
+  font-size: 13px;
+  letter-spacing: 0.5px;
+
+  transition: 0.3s ease;
+}
+
+nav a::after {
+  content: "";
+
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+
+  width: 0;
+  height: 1px;
+
+  background: var(--gold);
+
+  transition: 0.3s ease;
 }
 
 nav a:hover {
-  color: #ffd98a;
+  color: var(--gold-light);
 }
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* =========================
+   HERO
+========================= */
 
 .hero {
-  min-height: 92vh;
+  min-height: 94vh;
+
   display: grid;
   place-items: center;
-  padding: 60px 18px;
+
+  padding: 70px 18px;
 }
 
-.hero-card {
-  width: min(940px, 100%);
+.royal-frame {
+  position: relative;
+
+  width: min(920px, 100%);
+
+  padding: 65px 35px;
+
   text-align: center;
-  padding: 48px 22px;
-  border-radius: 34px;
+
+  border: 1px solid rgba(224, 173, 77, 0.5);
+  border-radius: 6px;
+
   background:
-    linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04)),
-    rgba(80, 6, 26, 0.72);
-  border: 1px solid rgba(255, 215, 145, 0.35);
-  box-shadow: 0 30px 90px rgba(0,0,0,0.35);
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,0.09),
+      rgba(255,255,255,0.025)
+    ),
+    rgba(73, 5, 24, 0.78);
+
+  box-shadow:
+    0 30px 100px rgba(0,0,0,0.45),
+    inset 0 0 50px rgba(255,190,70,0.03);
+}
+
+.royal-frame::before {
+  content: "";
+
+  position: absolute;
+  inset: 9px;
+
+  border: 1px solid rgba(221, 168, 68, 0.18);
+
+  pointer-events: none;
+}
+
+/* Decorative corners */
+
+.corner {
+  position: absolute;
+
+  width: 45px;
+  height: 45px;
+
+  border-color: var(--gold);
+  border-style: solid;
+
+  opacity: 0.75;
+}
+
+.corner-tl {
+  top: 20px;
+  left: 20px;
+
+  border-width: 2px 0 0 2px;
+}
+
+.corner-tr {
+  top: 20px;
+  right: 20px;
+
+  border-width: 2px 2px 0 0;
+}
+
+.corner-bl {
+  bottom: 20px;
+  left: 20px;
+
+  border-width: 0 0 2px 2px;
+}
+
+.corner-br {
+  bottom: 20px;
+  right: 20px;
+
+  border-width: 0 2px 2px 0;
 }
 
 .small-title,
 .section-subtitle,
 .event-label {
   text-transform: uppercase;
-  letter-spacing: 3px;
-  color: #ffd98a;
-  font-size: 12px;
+  letter-spacing: 4px;
+
+  color: var(--gold-light);
+
+  font-size: 11px;
   font-weight: 600;
-  margin-bottom: 14px;
+}
+
+.ornament {
+  margin: 18px 0 10px;
+
+  font-size: 30px;
+  color: var(--gold);
+
+  text-shadow: 0 0 20px rgba(255, 205, 100, 0.3);
 }
 
 h1 {
   font-family: "Great Vibes", cursive;
-  font-size: clamp(54px, 10vw, 118px);
-  line-height: 0.95;
-  color: #ffe6a7;
-  text-shadow: 0 6px 22px rgba(0,0,0,0.35);
+
+  font-size: clamp(62px, 11vw, 125px);
+
+  line-height: 0.9;
+
+  color: var(--gold-bright);
+
+  text-shadow:
+    0 5px 25px rgba(0,0,0,0.4),
+    0 0 30px rgba(231, 181, 80, 0.12);
 }
 
 h1 span {
@@ -103,26 +278,108 @@ h1 span {
 
 h1 small {
   display: block;
+
+  margin: 15px 0;
+
   font-family: "Playfair Display", serif;
-  font-size: 38px;
-  margin: 10px 0;
-  color: #fff7e0;
+
+  font-size: 32px;
+
+  color: var(--cream);
+}
+
+.gold-line {
+  width: 120px;
+  height: 1px;
+
+  margin: 30px auto;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--gold),
+    transparent
+  );
 }
 
 .invite-text {
-  max-width: 620px;
-  margin: 26px auto;
-  line-height: 1.8;
-  color: #fff3d0;
+  max-width: 640px;
+
+  margin: 0 auto 25px;
+
+  line-height: 1.9;
+
+  color: var(--cream-soft);
+
+  font-size: 14px;
 }
 
+/* =========================
+   DATE BADGE
+========================= */
+
+.date-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+
+  margin: 10px auto 30px;
+
+  padding: 10px 24px;
+
+  border-top: 1px solid rgba(218,169,73,0.5);
+  border-bottom: 1px solid rgba(218,169,73,0.5);
+}
+
+.date-badge > span {
+  font-family: "Playfair Display", serif;
+
+  font-size: 45px;
+  line-height: 1;
+
+  color: var(--gold-light);
+}
+
+.date-badge div {
+  text-align: left;
+}
+
+.date-badge strong,
+.date-badge small {
+  display: block;
+}
+
+.date-badge strong {
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: var(--gold);
+}
+
+.date-badge small {
+  margin-top: 3px;
+  font-size: 12px;
+  color: var(--cream-soft);
+}
+
+/* =========================
+   ART
+========================= */
+
 .art-box {
-  width: min(360px, 92%);
-  margin: 20px auto;
-  border-radius: 28px;
+  width: min(370px, 90%);
+
+  margin: 10px auto 22px;
+
   overflow: hidden;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255, 215, 145, 0.25);
+
+  border-radius: 4px;
+
+  border: 1px solid rgba(220,170,75,0.28);
+
+  background: rgba(255,255,255,0.035);
+
+  box-shadow:
+    0 15px 45px rgba(0,0,0,0.25);
 }
 
 .art-box img {
@@ -130,219 +387,669 @@ h1 small {
   display: block;
 }
 
-.map-btn {
-  display: inline-block;
-  border: none;
-  text-decoration: none;
-  padding: 14px 24px;
-  border-radius: 999px;
-  background: linear-gradient(135deg, #ffd98a, #b98233);
-  color: #430012;
-  font-weight: 700;
-  font-size: 15px;
-  cursor: pointer;
-  box-shadow: 0 12px 28px rgba(0,0,0,0.25);
+.hero-footer {
+  color: var(--gold);
+  font-family: "Playfair Display", serif;
+  font-style: italic;
+  font-size: 14px;
 }
+
+/* =========================
+   SECTIONS
+========================= */
 
 .countdown-section,
 .events-section,
 .venue-section,
 .blessings-section {
-  padding: 70px 7%;
+  padding: 90px 7%;
   text-align: center;
 }
 
 h2 {
   font-family: "Playfair Display", serif;
+
   font-size: clamp(32px, 5vw, 54px);
-  color: #ffe3a1;
-  margin-bottom: 28px;
+
+  line-height: 1.15;
+
+  color: var(--gold-light);
+
+  margin: 12px 0 20px;
 }
+
+.gold-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 14px;
+
+  margin: 15px auto 28px;
+
+  color: var(--gold);
+}
+
+.gold-divider::before,
+.gold-divider::after {
+  content: "";
+
+  width: 70px;
+  height: 1px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(218,169,73,0.7)
+  );
+}
+
+.gold-divider::after {
+  background: linear-gradient(
+    90deg,
+    rgba(218,169,73,0.7),
+    transparent
+  );
+}
+
+.gold-divider span {
+  font-size: 8px;
+}
+
+.section-description {
+  max-width: 560px;
+
+  margin: 0 auto;
+
+  color: var(--cream-soft);
+
+  font-size: 14px;
+
+  line-height: 1.8;
+}
+
+/* =========================
+   COUNTDOWN
+========================= */
 
 .countdown {
   display: grid;
+
   grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
-  max-width: 760px;
-  margin: 0 auto;
+
+  gap: 16px;
+
+  max-width: 780px;
+
+  margin: 35px auto 0;
 }
 
-.countdown div {
-  padding: 24px 12px;
-  border-radius: 24px;
-  background: rgba(255,255,255,0.09);
-  border: 1px solid rgba(255, 215, 145, 0.23);
+.count-box {
+  position: relative;
+
+  padding: 28px 12px;
+
+  border: 1px solid rgba(222,172,75,0.3);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,0.09),
+      rgba(255,255,255,0.025)
+    );
+
+  box-shadow:
+    inset 0 0 25px rgba(221,167,66,0.025),
+    0 15px 40px rgba(0,0,0,0.18);
 }
 
-.countdown strong {
+.count-box::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 20%;
+
+  width: 60%;
+  height: 1px;
+
+  background: var(--gold);
+}
+
+.count-box strong {
   display: block;
+
   font-family: "Playfair Display", serif;
-  font-size: clamp(30px, 6vw, 56px);
-  color: #ffd98a;
+
+  font-size: clamp(35px, 6vw, 58px);
+
+  color: var(--gold-light);
+
+  line-height: 1.1;
 }
 
-.countdown span {
-  font-size: 13px;
-  color: #fff2d1;
+.count-box span {
+  display: block;
+
+  margin-top: 8px;
+
+  text-transform: uppercase;
+
+  font-size: 10px;
+
+  letter-spacing: 2px;
+
+  color: var(--cream-soft);
 }
+
+/* =========================
+   EVENTS
+========================= */
 
 .event-grid {
   display: grid;
+
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 24px;
-  max-width: 900px;
-  margin: 0 auto;
+
+  gap: 25px;
+
+  max-width: 920px;
+
+  margin: 40px auto 0;
 }
 
 .event-card {
-  padding: 34px 22px;
-  border-radius: 28px;
+  position: relative;
+
+  min-height: 310px;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(222,172,75,0.4);
+
   background:
-    linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04)),
-    rgba(105, 12, 39, 0.72);
-  border: 1px solid rgba(255, 215, 145, 0.32);
-  box-shadow: 0 18px 55px rgba(0,0,0,0.25);
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,0.1),
+      rgba(255,255,255,0.025)
+    ),
+    rgba(91,8,31,0.72);
+
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.28);
+}
+
+.event-inner {
+  position: relative;
+
+  z-index: 1;
+
+  padding: 38px 20px;
+}
+
+.event-icon {
+  font-size: 28px;
+
+  color: var(--gold);
+
+  margin-bottom: 8px;
 }
 
 .event-card h3 {
   font-family: "Playfair Display", serif;
-  font-size: 28px;
-  color: #ffe3a1;
-  margin-bottom: 8px;
+
+  font-size: 27px;
+
+  color: var(--gold-light);
+
+  margin: 10px 0 5px;
+}
+
+.event-day {
+  color: var(--cream-soft);
+  font-size: 13px;
+}
+
+.event-line {
+  width: 60px;
+  height: 1px;
+
+  margin: 18px auto;
+
+  background: var(--gold);
 }
 
 .time {
-  font-size: 20px;
-  font-weight: 700;
-  color: #ffd98a;
-  margin: 16px 0 8px;
+  font-size: 18px;
+
+  font-weight: 600;
+
+  color: var(--gold-light);
+
+  margin-bottom: 8px;
 }
 
 .place {
-  color: #fff6df;
-  font-weight: 500;
+  font-size: 13px;
+
+  color: var(--cream);
 }
 
-.venue-section,
-.blessings-section {
-  max-width: 900px;
-  margin: 0 auto 60px;
-  border-radius: 30px;
-  background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(255, 215, 145, 0.22);
-}
+/* =========================
+   SCRATCH
+========================= */
 
-.venue-section p,
-.blessings-section p {
-  max-width: 650px;
-  margin: 0 auto 24px;
-  line-height: 1.8;
-  color: #fff3d0;
-}
-
-.names {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 18px;
-  flex-wrap: wrap;
-  margin-top: 28px;
-  font-family: "Great Vibes", cursive;
-  font-size: 38px;
-  color: #ffe3a1;
-}
-
-.names small {
-  font-family: "Playfair Display", serif;
-  font-size: 24px;
-  color: #fff;
-}
-
-footer {
-  text-align: center;
-  padding: 28px 16px;
-  color: #fff1c8;
-  border-top: 1px solid rgba(255, 215, 145, 0.16);
-}
-
-/* Old Scratch Box Design */
 .scratch-card {
-  position: relative;
-  overflow: hidden;
-  min-height: 250px;
   touch-action: none;
-}
-
-.scratch-content {
-  position: relative;
-  z-index: 1;
+  cursor: crosshair;
 }
 
 .scratch-canvas {
   position: absolute;
+
   inset: 0;
+
   width: 100%;
   height: 100%;
+
   z-index: 3;
-  border-radius: 28px;
+
+  border-radius: 0;
 }
 
 .scratch-text {
   position: absolute;
+
   inset: 0;
+
   z-index: 4;
+
   display: flex;
+
   align-items: center;
   justify-content: center;
+
   text-align: center;
-  padding: 20px;
-  color: #fff7d6;
-  font-family: "Playfair Display", serif;
-  font-size: 21px;
-  font-weight: 700;
+
   pointer-events: none;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.45);
+
+  color: var(--cream);
+
+  background: transparent;
+
+  text-shadow: 0 3px 12px rgba(0,0,0,0.6);
 }
 
-/* Animation */
+.scratch-text > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 8px;
+}
+
+.scratch-icon {
+  font-size: 28px;
+  color: var(--gold-light);
+}
+
+.scratch-text strong {
+  font-family: "Playfair Display", serif;
+
+  font-size: 22px;
+
+  color: var(--gold-bright);
+}
+
+.scratch-text small {
+  font-size: 11px;
+
+  text-transform: uppercase;
+
+  letter-spacing: 2px;
+
+  color: var(--cream-soft);
+}
+
+/* =========================
+   VENUE
+========================= */
+
+.venue-section,
+.blessings-section {
+  max-width: 1000px;
+
+  margin: 0 auto 30px;
+}
+
+.venue-card,
+.blessing-card {
+  padding: 60px 30px;
+
+  border: 1px solid rgba(222,172,75,0.3);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,0.08),
+      rgba(255,255,255,0.025)
+    );
+
+  box-shadow: 0 25px 70px rgba(0,0,0,0.25);
+}
+
+.venue-icon {
+  font-size: 38px;
+
+  margin: 15px 0;
+
+  filter: grayscale(1);
+
+  opacity: 0.85;
+}
+
+.venue-text,
+.blessing-text {
+  max-width: 650px;
+
+  margin: 0 auto 28px;
+
+  line-height: 1.9;
+
+  color: var(--cream-soft);
+
+  font-size: 14px;
+}
+
+.map-btn {
+  display: inline-flex;
+
+  align-items: center;
+  gap: 9px;
+
+  padding: 14px 25px;
+
+  border: 1px solid var(--gold);
+
+  border-radius: 2px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--gold-light),
+      #b77b25
+    );
+
+  color: #39000f;
+
+  text-decoration: none;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+
+  transition: 0.3s ease;
+}
+
+.map-btn:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 15px 35px rgba(221,169,72,0.25);
+}
+
+/* =========================
+   NAMES
+========================= */
+
+.names {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 20px;
+
+  flex-wrap: wrap;
+
+  margin-top: 35px;
+
+  font-family: "Great Vibes", cursive;
+
+  font-size: 48px;
+
+  color: var(--gold-light);
+}
+
+.names small {
+  font-family: "Playfair Display", serif;
+
+  font-size: 26px;
+
+  color: var(--cream);
+}
+
+.final-ornament {
+  margin-top: 30px;
+
+  color: var(--gold);
+
+  font-size: 30px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+  text-align: center;
+
+  padding: 40px 16px;
+
+  border-top: 1px solid rgba(220,170,75,0.16);
+
+  color: var(--cream-soft);
+}
+
+.footer-ornament {
+  color: var(--gold);
+
+  margin-bottom: 12px;
+
+  letter-spacing: 8px;
+}
+
+footer p {
+  font-family: "Playfair Display", serif;
+
+  font-size: 14px;
+}
+
+footer p span {
+  color: var(--gold-light);
+}
+
+footer small {
+  display: block;
+
+  margin-top: 8px;
+
+  color: rgba(255,240,200,0.6);
+
+  font-size: 10px;
+
+  letter-spacing: 2px;
+}
+
+/* =========================
+   REVEAL ANIMATION
+========================= */
+
 .reveal {
   opacity: 0;
-  transform: translateY(28px);
-  transition: 0.8s ease;
+
+  transform: translateY(35px);
+
+  transition:
+    opacity 0.9s ease,
+    transform 0.9s ease;
 }
 
 .reveal.show {
   opacity: 1;
+
   transform: translateY(0);
 }
 
+/* =========================
+   MOBILE
+========================= */
+
 @media (max-width: 760px) {
+
   .topbar {
     padding: 14px 5%;
   }
 
+  .brand {
+    font-size: 19px;
+  }
+
   nav {
-    gap: 12px;
+    gap: 14px;
   }
 
   nav a {
-    font-size: 12px;
+    font-size: 11px;
   }
 
-  .hero-card {
-    padding: 38px 16px;
+  .hero {
+    min-height: auto;
+
+    padding: 45px 14px 60px;
+  }
+
+  .royal-frame {
+    padding: 52px 20px;
+
+    border-radius: 4px;
+  }
+
+  .corner {
+    width: 32px;
+    height: 32px;
+  }
+
+  .corner-tl,
+  .corner-tr {
+    top: 14px;
+  }
+
+  .corner-bl,
+  .corner-br {
+    bottom: 14px;
+  }
+
+  .corner-tl,
+  .corner-bl {
+    left: 14px;
+  }
+
+  .corner-tr,
+  .corner-br {
+    right: 14px;
+  }
+
+  h1 {
+    font-size: clamp(58px, 18vw, 85px);
+  }
+
+  h1 small {
+    font-size: 26px;
+
+    margin: 12px 0;
+  }
+
+  .invite-text {
+    font-size: 13px;
+
+    line-height: 1.8;
+  }
+
+  .date-badge {
+    margin-bottom: 25px;
+  }
+
+  .countdown-section,
+  .events-section,
+  .venue-section,
+  .blessings-section {
+    padding: 65px 5%;
   }
 
   .countdown {
     grid-template-columns: repeat(2, 1fr);
+
+    gap: 10px;
+  }
+
+  .count-box {
+    padding: 22px 8px;
   }
 
   .event-grid {
     grid-template-columns: 1fr;
+
+    gap: 18px;
+  }
+
+  .event-card {
+    min-height: 300px;
+  }
+
+  .venue-card,
+  .blessing-card {
+    padding: 45px 20px;
   }
 
   .names {
-    font-size: 32px;
+    font-size: 37px;
+
+    gap: 12px;
+  }
+
+  .names small {
+    font-size: 22px;
   }
 }
-  
+
+/* =========================
+   VERY SMALL PHONES
+========================= */
+
+@media (max-width: 390px) {
+
+  nav {
+    gap: 9px;
+  }
+
+  nav a {
+    font-size: 10px;
+  }
+
+  h1 {
+    font-size: 55px;
+  }
+
+  .count-box strong {
+    font-size: 34px;
+  }
+
+  .names {
+    font-size: 33px;
+  }
+
+}
